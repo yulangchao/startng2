@@ -29,22 +29,34 @@ export class Todo {
   private todos: Array<Todo> = [];
 
   constructor(public todoService: TodoService) {
-    console.log('Todo constructor go!');
+      console.log('Todo constructor go!');
 
       //this.todos = [];
       todoService.getAll()
-        // `Rxjs`; we subscribe to the response
-        .subscribe((res) => {
+      // `Rxjs`; we subscribe to the response
+          .subscribe((res) => {
 
-            // Populate our `todo` array with the `response` data
-            this.todos = res;
-            // Reset `todo` input
-            this.todoData.text = '';
-        });
+              // Populate our `todo` array with the `response` data
+              this.todos = res;
+              // Reset `todo` input
+              this.todoData.text = '';
+          });
+
+      setInterval(() => {
+          todoService.getAll()
+          // `Rxjs`; we subscribe to the response
+              .subscribe((res) => {
+
+                  // Populate our `todo` array with the `response` data
+                  this.todos = res;
+                  // Reset `todo` input
+                  this.todoData.text = '';
+              });
+      }, 1000);
   }
 
-  createTodo() {
 
+  createTodo() {
       this.todoService.createTodo(this.todoData)
         .subscribe((res) => {
 
@@ -62,6 +74,18 @@ export class Todo {
 
           // Populate our `todo` array with the `response` data
           this.todos = res;
+      });
+  }
+
+  refresh(){
+      console.log("11111");
+      this.todoService.getAll()
+          .subscribe((res) => {
+
+              // Populate our `todo` array with the `response` data
+              this.todos = res;
+              // Reset `todo` input
+              this.todoData.text = '';
       });
   }
 }

@@ -18,6 +18,7 @@ import {RouteConfig, Router} from 'angular2/router';
 
 import {Home} from './home/home';
 
+import { RegisterComponent } from './register/index';
 // Import NgFor directive
 import {NgFor} from 'angular2/common';
 
@@ -26,6 +27,8 @@ import {Todo} from './todo/todo.component';
 
 // Import Recipes component
 import {Recipes} from './recipes/recipes.component';
+
+import {Chat} from './chat/chat.component';
 
 /*
  * App Component
@@ -39,59 +42,16 @@ import {Recipes} from './recipes/recipes.component';
   pipes: [],
   // Load our main `Sass` file into our `app` `component`
   styleUrls: [require('!style!css!sass!../sass/main.scss')],
-  template: `
-    <header>
-      <nav class="navbar navbar-inverse navbar-fixed-top">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>                        
-              </button>
-              <a class="navbar-brand" href="#">Hello {{ name }}</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                  <li router-activ>
-                    <a [routerLink]=" ['Index'] ">Home</a>
-                  </li>
-                  <li router-active>
-                    <a [routerLink]=" ['Todo'] ">Todo</a>
-                  </li>
-                  <li router-active>
-                    <a [routerLink]=" ['Recipes'] ">NG2 Redux</a>
-                  </li>
-                  <li router-active>
-                    <a [routerLink]=" ['About'] ">About</a>
-                  </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                  <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                  <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
-            </div>
-          </div> 
-      </nav>
-    </header>
+  template: require('./layout.html')
 
-    <main style="margin-top: 60px;">
-      <router-outlet></router-outlet>
-    </main>
-
-    <footer>
-      Angular 2 by<a [href]="url">@richardyych</a>
-      <div>
-        <img [src]="angularLogo" width="10%">
-      </div>
-    </footer>
-  `
 })
 @RouteConfig([
   { path: '/', name: 'Index', component: Home, useAsDefault: true },
   { path: '/home',  name: 'Home',  component: Home },
   { path: '/todo', component: Todo, name: 'Todo' },
   { path: '/redux', component: Recipes, name: 'Recipes' },
+  { path: '/register', component: RegisterComponent, name: 'Register' },
+  { path: '/chat', component: Chat, name: 'Chat' },
   // Async load a component using Webpack's require with
   // es6-promise-loader and webpack `require`
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about/about')('About') },
@@ -100,9 +60,14 @@ export class App {
   angularLogo = 'assets/img/angular-logo.png';
   name = 'LoL Players';
   url = 'https://github.com/yulangchao';
+  public check_button: any = false;
 
   constructor() {
 
+  }
+
+  press(){
+    this.check_button = !this.check_button;
   }
 }
 

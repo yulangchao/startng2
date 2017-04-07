@@ -37,7 +37,8 @@ export default (app, router) => {
 
       Todo.create({
 
-        text : req.body.text
+        text : req.body.text,
+        name : req.body.name
 
       }, (err, todo) => {
 
@@ -108,6 +109,8 @@ export default (app, router) => {
         // Only update a field if a new value has been passed in
         if (req.body.text)
           todo.text = req.body.text;
+        if (req.body.name)
+          todo.name = req.body.name;
 
         // save the todo item
         return todo.save((err) => {
