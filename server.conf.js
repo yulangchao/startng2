@@ -58,7 +58,7 @@ import base from './sockets/base';
 base(io);
 
 // Set the port for this app
-let port = process.env.PORT || 8080;
+let port = process.env.PORT || 80;
 
 // Load Mongoose config file for connecting to MongoDB instance
 import mongooseConf from './config/mongoose.conf.js';
@@ -124,7 +124,21 @@ import routes from './app/routes';
 routes(app, router, passport);
 
 // ### Ignition Phase
+// socket
+io.on('connection', (socket) => {
+    console.log('user connected');
 
+socket.on('disconnect', function(){
+    console.log('user disconnected');
+});
+
+socket.on('add-message', (message) => {
+    io.emit('message', {type:'new-message', text: message});
+});
+});
+
+
+//
 server.listen(port);
 
 // Shoutout to the user

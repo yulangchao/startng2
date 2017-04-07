@@ -17,7 +17,8 @@ import mongoose from 'mongoose';
 // Create a `schema` for the `Todo` object
 let todoSchema = new mongoose.Schema({
   text: { type : String },
-  name: {type: String} 
+  name: {type: String} ,
+  date: {type: String}
 });
 
 // Expose the model so that it can be imported and used in

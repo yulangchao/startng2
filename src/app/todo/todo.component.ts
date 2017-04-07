@@ -41,18 +41,7 @@ export class Todo {
               // Reset `todo` input
               this.todoData.text = '';
           });
-
-      setInterval(() => {
-          todoService.getAll()
-          // `Rxjs`; we subscribe to the response
-              .subscribe((res) => {
-
-                  // Populate our `todo` array with the `response` data
-                  this.todos = res;
-                  // Reset `todo` input
-                  this.todoData.text = '';
-              });
-      }, 1000);
+      
   }
 
 

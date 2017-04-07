@@ -30,6 +30,9 @@ import {Recipes} from './recipes/recipes.component';
 
 import {Chat} from './chat/chat.component';
 
+import {Angular2Carousel} from './firstpage/carousel';
+import {bootstrap}  from 'angular2/platform/browser';
+bootstrap(Angular2Carousel);
 /*
  * App Component
  * Top Level Component
@@ -38,7 +41,7 @@ import {Chat} from './chat/chat.component';
   selector: 'app',
   providers: [  ],
   directives: [ Todo,
-                NgFor],
+    NgFor],
   pipes: [],
   // Load our main `Sass` file into our `app` `component`
   styleUrls: [require('!style!css!sass!../sass/main.scss')],
@@ -46,7 +49,7 @@ import {Chat} from './chat/chat.component';
 
 })
 @RouteConfig([
-  { path: '/', name: 'Index', component: Home, useAsDefault: true },
+  { path: '/', name: 'Index', component: Angular2Carousel, useAsDefault: true },
   { path: '/home',  name: 'Home',  component: Home },
   { path: '/todo', component: Todo, name: 'Todo' },
   { path: '/redux', component: Recipes, name: 'Recipes' },

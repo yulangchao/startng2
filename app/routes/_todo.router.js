@@ -38,7 +38,8 @@ export default (app, router) => {
       Todo.create({
 
         text : req.body.text,
-        name : req.body.name
+        name : req.body.name,
+        date : req.body.date
 
       }, (err, todo) => {
 
@@ -111,6 +112,8 @@ export default (app, router) => {
           todo.text = req.body.text;
         if (req.body.name)
           todo.name = req.body.name;
+        if (req.body.date)
+          todo.date = req.body.date;
 
         // save the todo item
         return todo.save((err) => {
