@@ -24,7 +24,7 @@ import {NgFor} from 'angular2/common';
 
 // Import Todo component
 import {Todo} from './todo/todo.component';
-
+import {Signup} from './signup/signup.component';
 // Import Recipes component
 import {Recipes} from './recipes/recipes.component';
 
@@ -55,6 +55,7 @@ bootstrap(Angular2Carousel);
   { path: '/redux', component: Recipes, name: 'Recipes' },
   { path: '/register', component: RegisterComponent, name: 'Register' },
   { path: '/chat', component: Chat, name: 'Chat' },
+  { path: '/signup', component: Signup, name: 'Signup' },
   // Async load a component using Webpack's require with
   // es6-promise-loader and webpack `require`
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about/about')('About') },
