@@ -21,7 +21,7 @@
                     <!--<li router-active>-->
                         <!--<a [routerLink]=" ['Recipes'] ">NG2 Redux</a>-->
                     <!--</li>-->
-                    <li router-active>
+                    <li *ngIf="isAuthenticate" router-active>
                         <a [routerLink]=" ['Chat'] ">Chat</a>
                     </li>
                     <li router-active>
@@ -29,8 +29,10 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a [routerLink]=" ['Signup'] "><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li *ngIf="isAuthenticate"><a><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                    <li *ngIf="!isAuthenticate"><a [routerLink]=" ['Signup'] "><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li *ngIf="!isAuthenticate"><a [routerLink]=" ['Signin'] "><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li *ngIf="isAuthenticate"><a (click)="authService.logout()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
                 </ul>
             </div>
         </div>

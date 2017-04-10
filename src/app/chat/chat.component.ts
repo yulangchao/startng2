@@ -1,7 +1,7 @@
 import {Component, View, AfterViewChecked, ElementRef, ViewChild, OnInit} from 'angular2/core';
 import {Angular2AutoScroll} from "angular2-auto-scroll/lib/angular2-auto-scroll.directive";
 import {ChatService} from './chat.service';
-
+import {Router} from 'angular2/router';
 // We `import` `http` into our `ChatService` but we can only
 // specify providers within our component
 import {HTTP_PROVIDERS} from 'angular2/http';
@@ -36,8 +36,14 @@ export class Chat implements OnInit, AfterViewChecked{
   private chats: Array<Chat> = [];
   private check_chat: number = 0;
   private submit_name: number= 0;
-  constructor(public ChatService: ChatService) {
+  constructor(private router: Router, public ChatService: ChatService) {
       console.log('Chat constructor go!');
+      if (localStorage.getItem('token')) {
+          console.log(JSON.parse(localStorage.getItem('token')).local.username);
+          this.chatData.name = JSON.parse(localStorage.getItem('token')).local.username;
+      } else {
+          router.navigate(['Index']);
+      }
 
       //this.chats = [];
       ChatService.getAll()
@@ -83,7 +89,7 @@ export class Chat implements OnInit, AfterViewChecked{
       console.log(this.chatData);
       this.ChatService.createChat(this.chatData)
         .subscribe((res) => {
-
+            console.log("6666");
             // Populate our `todo` array with the `response` data
             this.chats = res;
             // Reset `todo` input

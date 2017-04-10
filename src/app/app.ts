@@ -30,6 +30,10 @@ import {Recipes} from './recipes/recipes.component';
 
 import {Chat} from './chat/chat.component';
 
+import {SignUpComponent} from './auth/signup/signup.component';
+import {SignInComponent} from './auth/signin/signin.component';
+import {AuthService} from './auth/auth.service';
+
 import {Angular2Carousel} from './firstpage/carousel';
 import {bootstrap}  from 'angular2/platform/browser';
 bootstrap(Angular2Carousel);
@@ -39,7 +43,7 @@ bootstrap(Angular2Carousel);
  */
 @Component({
   selector: 'app',
-  providers: [  ],
+  providers: [ AuthService ],
   directives: [ Todo,
     NgFor],
   pipes: [],
@@ -55,7 +59,9 @@ bootstrap(Angular2Carousel);
   { path: '/redux', component: Recipes, name: 'Recipes' },
   { path: '/register', component: RegisterComponent, name: 'Register' },
   { path: '/chat', component: Chat, name: 'Chat' },
-  { path: '/signup', component: Signup, name: 'Signup' },
+ // { path: '/signup', component: Signup, name: 'Signup' },
+  { path: '/signup', component: SignUpComponent, name: 'Signup' },
+  { path: '/signin', component: SignInComponent, name: 'Signin' },
   // Async load a component using Webpack's require with
   // es6-promise-loader and webpack `require`
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about/about')('About') },
@@ -65,13 +71,17 @@ export class App {
   name = 'LoL Players';
   url = 'https://github.com/yulangchao';
   public check_button: any = false;
-
-  constructor() {
-
+  public isAuthenticate: any;
+  public authService: any;
+  constructor(authService: AuthService) {
+    console.log(authService.isAuthenticate());
+    this.authService = authService;
+    this.isAuthenticate = authService.isAuthenticate();
   }
 
   press(){
     this.check_button = !this.check_button;
+
   }
 }
 
